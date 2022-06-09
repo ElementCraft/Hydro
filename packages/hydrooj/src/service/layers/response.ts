@@ -53,6 +53,8 @@ export default (logger) => async (ctx: KoaContext, next) => {
             try {
                 await ctx.render(error instanceof UserFacingError ? 'error.html' : 'bsod.html', { error });
             } catch (e) {
+                console.log(logger);
+                console.log(logger.err);
                 logger.error(e);
                 // this.response.body.error = {};
             }
