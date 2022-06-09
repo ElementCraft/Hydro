@@ -8,7 +8,7 @@ function serializer(k: string, v: any) {
     return v;
 }
 
-export default (logger) => async (ctx: KoaContext, next) => {
+export default (logger, tmp) => async (ctx: KoaContext, next) => {
     const {
         request, response, UiContext, user, args,
     } = ctx.HydroContext;
@@ -53,9 +53,9 @@ export default (logger) => async (ctx: KoaContext, next) => {
             try {
                 await ctx.render(error instanceof UserFacingError ? 'error.html' : 'bsod.html', { error });
             } catch (e) {
-                console.log(logger);
-                console.log(logger.err);
-                logger.error(e);
+                console.log(e);
+                console.log(tmp);
+                // logger.error(e);
                 // this.response.body.error = {};
             }
         }
